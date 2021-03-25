@@ -1,7 +1,7 @@
 # active-parameter-verification
 
 #### Description
-基于java的 主动式参数校验工具
+Active parameter verification tool based on java
 
 #### Software Architecture
 Software architecture description
@@ -11,7 +11,7 @@ Software architecture description
 1.  git clone https://gitee.com/Mylomen/active-parameter-verification.git
 2.  cd  active-parameter-verification
 3.  mvn clean && mvn deploy
-4.  引入maven依赖
+4.  Introduce maven dependency
 
 #### Instructions
 
