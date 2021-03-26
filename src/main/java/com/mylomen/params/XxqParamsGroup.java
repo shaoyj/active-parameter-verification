@@ -4,7 +4,7 @@ package com.mylomen.params;
  * @author: Shaoyongjun
  * @date: 2020/9/4
  * @time: 10:01 AM
- * @copyright by  上海鱼泡泡信息技术有限公司
+ * @copyright
  */
 public enum XxqParamsGroup {
 

@@ -9,7 +9,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * @author: Shaoyongjun
  * @date: 2020/9/3
  * @time: 10:21 AM
- * @copyright by  上海鱼泡泡信息技术有限公司
+ * @copyright
  */
 @Documented
 @Inherited

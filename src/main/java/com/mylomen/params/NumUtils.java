@@ -5,7 +5,7 @@ package com.mylomen.params;
  * @author: Shaoyongjun
  * @date: 2020/3/3
  * @time: 6:25 PM
- * @copyright by  上海鱼泡泡信息技术有限公司
+ * @copyright
  */
 public class NumUtils {
 

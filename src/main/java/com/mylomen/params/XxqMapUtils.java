@@ -12,7 +12,7 @@ import java.util.Map;
  * @author: Shaoyongjun
  * @date: 2020/8/27
  * @time: 4:59 PM
- * @copyright by  上海鱼泡泡信息技术有限公司
+ * @copyright
  */
 public class XxqMapUtils {
 

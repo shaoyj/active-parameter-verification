@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * @author: Shaoyongjun
  * @date: 2020/9/3
  * @time: 8:22 PM
- * @copyright by  上海鱼泡泡信息技术有限公司
+ * @copyright
  */
 public class XxqMapParamsUtils {
 
