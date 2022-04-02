@@ -49,6 +49,10 @@ public @interface XxqParams {
 
     String maxLength() default "";
 
+    String maxValue() default "";
+
+    String minValue() default "";
+
     /**
      * Defines several {@code @NotEmpty} constraints on the same element.
      *

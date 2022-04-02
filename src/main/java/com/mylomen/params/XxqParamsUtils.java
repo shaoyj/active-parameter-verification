@@ -41,10 +41,10 @@ public class XxqParamsUtils {
 
         //父类
         if (clazz != Object.class && clazz.getSuperclass() != Object.class) {
-            Field[] parentFileds = clazz.getSuperclass().getDeclaredFields();
-            if (DefaultUtils.isNotEmpty(parentFileds)) {
+            Field[] parentFields = clazz.getSuperclass().getDeclaredFields();
+            if (DefaultUtils.isNotEmpty(parentFields)) {
                 //遍历
-                Arrays.stream(parentFileds).forEach(objFile -> {
+                Arrays.stream(parentFields).forEach(objFile -> {
                     if (objFile.isAnnotationPresent(XxqParams.class)) {
                         list.add(objFile);
                     }
@@ -133,25 +133,25 @@ public class XxqParamsUtils {
     static String getErrMsg(String fieldName, Object value, XxqParams annotation) {
         if (DefaultUtils.isNotEmpty(annotation.noNull())) {
             if (Objects.isNull(value)) {
-                return getWarnMsg(fieldName, annotation);
+                return annotation.noNull();
             }
         }
 
 
         if (DefaultUtils.isNotEmpty(annotation.noEmpty())) {
             if (DefaultUtils.isEmpty(value)) {
-                return getWarnMsg(fieldName, annotation);
+                return annotation.noEmpty();
             }
         }
 
 
         if (DefaultUtils.isNotEmpty(annotation.noBlank())) {
             if (Objects.isNull(value)) {
-                return getWarnMsg(fieldName, annotation);
+                return annotation.noBlank();
             }
 
             if (DefaultUtils.isBlank(value.toString())) {
-                return getWarnMsg(fieldName, annotation);
+                return annotation.noBlank();
             }
 
         }
@@ -159,37 +159,52 @@ public class XxqParamsUtils {
 
         if (DefaultUtils.isNotEmpty(annotation.noNullAndZero())) {
             if (NumUtils.isNullOrZero(value)) {
-                return getWarnMsg(fieldName, annotation);
+                return annotation.noNullAndZero();
             }
         }
 
-        if (DefaultUtils.isNotEmpty(annotation.minLength())) {
-            long min = DefaultUtils.toLong(annotation.minLength());
-            if (min > 0) {
-                if (Objects.nonNull(value) && value.toString().length() < min) {
-                    return getWarnMsg(fieldName, annotation);
+        //不能为空的前提下 判断参数长度/最大值
+        if (Objects.nonNull(value)) {
+            //最小长度
+            if (DefaultUtils.isNotEmpty(annotation.minLength())) {
+                long min = DefaultUtils.toLong(annotation.minLength());
+                if (min > 0) {
+                    if (value.toString().length() < min) {
+                        return annotation.minLength();
+                    }
                 }
             }
-        }
 
-        if (DefaultUtils.isNotEmpty(annotation.maxLength())) {
-            long max = DefaultUtils.toLong(annotation.maxLength());
-            if (max > 0) {
-                if (Objects.nonNull(value) && value.toString().length() > max) {
-                    return getWarnMsg(fieldName, annotation);
+            //最大长度
+            if (DefaultUtils.isNotEmpty(annotation.maxLength())) {
+                long max = DefaultUtils.toLong(annotation.maxLength());
+                if (max > 0 && value.toString().length() > max) {
+                    return annotation.maxLength();
                 }
             }
+
+
+            //最大值
+            if (DefaultUtils.isNotEmpty(annotation.maxValue())) {
+                long maxValue = DefaultUtils.toLong(annotation.maxValue());
+                if (DefaultUtils.toLong(value.toString()) > maxValue) {
+                    return annotation.maxValue();
+                }
+            }
+
+
+            //最小值
+            if (DefaultUtils.isNotEmpty(annotation.minValue())) {
+                long minValue = DefaultUtils.toLong(annotation.minValue());
+                if (DefaultUtils.toLong(value.toString()) < minValue) {
+                    return annotation.minValue();
+                }
+            }
+
+
         }
 
         return null;
-    }
-
-    private static String getWarnMsg(String fieldName, XxqParams annotation) {
-        if (DefaultUtils.isNotEmpty(annotation.noNull())) {
-            return annotation.noNull();
-        } else {
-            return fieldName + "字段非法";
-        }
     }
 
 
